@@ -1,0 +1,110 @@
+ 20 Exercícios Básicos de Variáveis, Operadores e Condicionais (Java)
+1) Par ou Ímpar
+Peça um número inteiro e informe se ele é par ou ímpar.
+
+2) Maior de Dois Números
+Receba dois números e diga qual é o maior — ou se são iguais.
+
+3) Positivo, Negativo ou Zero
+Leia um número e classifique-o como positivo, negativo ou zero.
+
+4) Média Simples
+Peça três notas, calcule a média e exiba se o aluno está:
+
+Aprovado (≥ 7)
+Recuperação (≥ 5 e < 7)
+Reprovado (< 5)
+
+
+5) Aumento Salarial
+Receba o salário e aplique:
+
+10% se < 2000
+7% se entre 2000 e 4000
+5% se > 4000
+
+Mostre o salário final.
+
+6) Idade para Votar
+Peça a idade e informe se pode:
+
+Não votar
+Voto opcional
+Voto obrigatório
+
+
+7) Conversão de Temperatura
+Leia a temperatura em Celsius e converta para Fahrenheit.
+
+8) Desconto no Produto
+Leia o valor de um produto e aplique:
+
+20% de desconto se valor > 100
+Senão, 10%
+
+Retorne o valor final.
+
+9) Verificação de Múltiplos
+Receba dois números e diga se o primeiro é múltiplo do segundo.
+
+10) Peso Ideal
+Peça altura e sexo e calcule:
+
+Homem: (72.7 × h) – 58
+Mulher: (62.1 × h) – 44.7
+
+
+11) Verificar Ano Bissexto
+Receba um ano e diga se é bissexto.
+
+12) Calculadora Simples
+Receba dois números e um operador (+, -, *, /) e faça a operação correspondente.
+
+13) Classificação de Nota (0 a 10)
+Receba uma nota e valide:
+
+Se < 0 ou > 10 → inválida
+Caso contrário → válida
+
+
+14) Custo de Viagem
+Receba a distância e o consumo do carro (km/L).
+Calcule quantos litros serão gastos.
+
+15) Faixa Etária
+Receba a idade e mostre:
+
+Criança (0–12)
+Adolescente (13–17)
+Adulto (18–59)
+Idoso (60+)
+
+
+16) Login Simples
+Receba usuário e senha.
+Somente permita acesso se usuário = "admin" e senha = "1234".
+
+17) Aprovação por Nota e Frequência
+Receba nota (0 a 10) e frequência (%).
+Aprovado se:
+
+nota ≥ 7 e frequência ≥ 75
+
+
+18) Consumo de Energia
+Receba kWh utilizados e calcule:
+
+R$ 0,20 por kWh se consumo < 100
+R$ 0,25 se ≥ 100
+
+
+19) Menor de Três Números
+Receba três valores e exiba o menor deles.
+
+20) Classificação de Triângulo
+Receba três lados e informe:
+
+Não forma triângulo
+Equilátero
+Isósceles
+Escaleno
