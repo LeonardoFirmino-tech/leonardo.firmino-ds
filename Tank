@@ -1,0 +1,107 @@
+package DLBK14;
+
+import robocode.*;
+import java.util.HashMap;
+
+public class DLBK14 extends AdvancedRobot {
+
+    double direcao = 1;
+    HashMap<String, Double> inimigos = new HashMap<>();
+
+    public void run() {
+
+        setAdjustGunForRobotTurn(true);
+        setAdjustRadarForGunTurn(true);
+
+        while (true) {
+
+            // evita ficar preso nas bordas
+            if (getX() < 100 || getX() > getBattleFieldWidth() - 100 ||
+                getY() < 100 || getY() > getBattleFieldHeight() - 100) {
+                setTurnRight(90);
+            }
+
+            setAhead(120 * direcao);
+
+            // muda direção de vez em quando
+            if (Math.random() > 0.95) {
+                direcao *= -1;
+            }
+
+            setTurnRadarRight(360);
+            execute();
+        }
+    }
+
+    public void onScannedRobot(ScannedRobotEvent e) {
+
+        inimigos.put(e.getName(), e.getDistance());
+
+        // escolher o inimigo mais próximo
+        String alvo = e.getName();
+        double menorDist = e.getDistance();
+
+        for (String nome : inimigos.keySet()) {
+            if (inimigos.get(nome) < menorDist) {
+                menorDist = inimigos.get(nome);
+                alvo = nome;
+            }
+        }
+
+        if (!e.getName().equals(alvo)) return;
+
+        double anguloAbs = getHeadingRadians() + e.getBearingRadians();
+
+        // radar acompanhando
+        double ajusteRadar = anguloAbs - getRadarHeadingRadians();
+        setTurnRadarRightRadians(ajusteRadar * 1.5);
+
+        // previsão simples
+        double velocidadeBala = 20 - 6;
+        double tempo = e.getDistance() / velocidadeBala;
+
+        double futuroX = getX()
+                + Math.sin(anguloAbs) * e.getDistance()
+                + Math.sin(e.getHeadingRadians()) * e.getVelocity() * tempo;
+
+        double futuroY = getY()
+                + Math.cos(anguloAbs) * e.getDistance()
+                + Math.cos(e.getHeadingRadians()) * e.getVelocity() * tempo;
+
+        double anguloMira = Math.atan2(futuroX - getX(), futuroY - getY());
+
+        setTurnGunRightRadians(
+                robocode.util.Utils.normalRelativeAngle(
+                        anguloMira - getGunHeadingRadians()
+                )
+        );
+
+        // movimento lateral (difícil de acertar)
+        setTurnRight(e.getBearing() + 90);
+        setAhead(100 * direcao);
+
+        if (Math.random() > 0.9) {
+            direcao *= -1;
+        }
+
+        // tiro por distância
+        if (getGunHeat() == 0) {
+            if (e.getDistance() < 150) setFire(3);
+            else if (e.getDistance() < 400) setFire(2);
+            else setFire(1);
+        }
+
+        execute();
+    }
+
+    public void onHitByBullet(HitByBulletEvent e) {
+        direcao *= -1;
+        setAhead(150 * direcao);
+        setTurnRight(90);
+    }
+
+    public void onHitRobot(HitRobotEvent e) {
+        if (getGunHeat() == 0) fire(3);
+        back(100);
+    }
+}
